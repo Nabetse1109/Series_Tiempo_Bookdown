@@ -1,4 +1,4 @@
-book_filename: "Series_de_Tiempo"
+book_filename: "index"
+rmd_files: ["index.Rmd"]
 output_dir: "docs"
 delete_merged_file: true
-

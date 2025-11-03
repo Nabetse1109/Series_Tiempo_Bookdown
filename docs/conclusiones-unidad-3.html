@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)</title>
-  <meta name="description" content="Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)" />
+  <title>10 Conclusiones Unidad 3 | Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)</title>
+  <meta name="description" content="10 Conclusiones Unidad 3 | Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)" />
   <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)" />
+  <meta property="og:title" content="10 Conclusiones Unidad 3 | Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)" />
+  <meta name="twitter:title" content="10 Conclusiones Unidad 3 | Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="propuesta-de-información-a-pronosticar.html"/>
+<link rel="prev" href="diferencias-δ-y-δ₁₂-rezagos-y-estabilización.html"/>
+<link rel="next" href="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -190,23 +190,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)</h1>
-<p class="author"><em>Edgar Esteban Grajales, Kassandra Mendoza-Sarmiento y Paula Tovar Ríos</em></p>
-<p class="date"><em>2025-11-03</em></p>
-</div>
-<div id="introducción" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">1</span> Introducción<a href="#introducci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>La presente propuesta corresponde a la Actividad 1 del curso Análisis de Series de Tiempo,en este actividad se aplica el uso de herramientas TIC, específicamente Bookdown en RStudio y GitHub Pages, para elaborar un documento reproducible que describe el enfoque del proyecto y la base de datos seleccionada para el análisis.</p>
-<p>El propósito central es definir el contexto y la relevancia del estudio, identificando la información a pronosticar, su valor agregado y los alcances del análisis de series de tiempo propuesto. La propuesta utiliza el dataset público “Australia Monthly Retail Turnover” disponible en Kaggle, lo que permite explorar comportamientos económicos mensuales y sentar las bases para futuros modelos de predicción orientados a la toma de decisiones basadas en datos.</p>
+<div id="conclusiones-unidad-3" class="section level1 hasAnchor" number="10">
+<h1><span class="header-section-number">10</span> Conclusiones Unidad 3<a href="conclusiones-unidad-3.html#conclusiones-unidad-3" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>El análisis exploratorio de la serie mensual Australia Monthly Retail Turnover (1982–2024) permitió caracterizar su comportamiento histórico mediante técnicas gráficas y estadísticas que revelan su estructura temporal y estacional.</p>
+<p>🔹 1. Identificación del patrón general</p>
+<p>A partir de los promedios móviles (SMA(12) y EMA(6)), se observó una tendencia creciente sostenida en el volumen de ventas minoristas, con incrementos marcados desde mediados de los años noventa y aceleraciones notorias a partir de 2010.
+Esta tendencia indica un crecimiento estructural del comercio minorista australiano, vinculado al aumento del consumo y expansión económica.</p>
+<p>🔹 2. Estructura estacional</p>
+<p>El análisis mediante seasonplot, subseries y promedios mensuales mostró un patrón estacional anual fuerte y estable, con picos de ventas en noviembre–diciembre (época de fin de año) y caídas en enero–febrero.
+Este comportamiento fue confirmado estadísticamente mediante la función de autocorrelación (ACF), con picos significativos en múltiplos de 12 rezagos.</p>
+<p>🔹 3. Descomposición y componentes</p>
+<p>La descomposición STL robusta separó la serie en sus tres componentes principales:</p>
+<p>Tendencia: crecimiento constante en el largo plazo.</p>
+<p>Estacionalidad: patrón mensual repetitivo.</p>
+<p>Residuo: fluctuaciones irregulares atribuibles a choques económicos o eventos específicos.</p>
+<p>Los componentes de tendencia y estacionalidad son dominantes, lo cual explica la necesidad de transformaciones previas al modelado.</p>
+<p>🔹 4. Estabilización de la serie</p>
+<p>Al aplicar las diferencias regulares (Δ) y estacionales (Δ₁₂) se evidenció la eliminación progresiva de la tendencia y del patrón repetitivo.
+La combinación Δ·Δ₁₂ produjo una serie con varianza reducida y autocorrelación acotada, candidata a estacionaria y adecuada para la estimación de modelos ARIMA estacionales (SARIMA).</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="propuesta-de-información-a-pronosticar.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="diferencias-δ-y-δ₁₂-rezagos-y-estabilización.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

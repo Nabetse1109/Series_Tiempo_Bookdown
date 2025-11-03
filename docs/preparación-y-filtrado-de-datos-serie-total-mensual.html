@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Preparación y filtrado de datos: serie total mensual | Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)</title>
+  <meta name="description" content="5 Preparación y filtrado de datos: serie total mensual | Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Preparación y filtrado de datos: serie total mensual | Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Preparación y filtrado de datos: serie total mensual | Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)" />
+  
+  
+  
+
+<meta name="author" content="Edgar Esteban Grajales, Kassandra Mendoza-Sarmiento y Paula Tovar Ríos" />
+
+
+<meta name="date" content="2025-11-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="descripción-y-justificación-del-conjunto-de-datos.html"/>
+<link rel="next" href="construcción-de-la-serie-temporal.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">📊 Series de Tiempo - Kaggle Retail Turnover</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="index.html"><a href="#propuesta-de-informaci%C3%B3n-a-pronosticar"><i class="fa fa-check"></i><b>2</b> Propuesta de información a pronosticar</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="propuesta-de-información-a-pronosticar.html"><a href="propuesta-de-información-a-pronosticar.html"><i class="fa fa-check"></i><b>2.1</b> <strong>Tema y base de datos</strong></a></li>
+<li class="chapter" data-level="2.2" data-path="propuesta-de-información-a-pronosticar.html"><a href="propuesta-de-información-a-pronosticar.html#importancia-y-valor-agregado"><i class="fa fa-check"></i><b>2.2</b> <strong>Importancia y valor agregado</strong></a></li>
+<li class="chapter" data-level="2.3" data-path="propuesta-de-información-a-pronosticar.html"><a href="propuesta-de-información-a-pronosticar.html#alcance-propuesto"><i class="fa fa-check"></i><b>2.3</b> <strong>Alcance propuesto</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="conclusiones-unidad-1.html"><a href="conclusiones-unidad-1.html"><i class="fa fa-check"></i><b>3</b> Conclusiones Unidad 1</a></li>
+<li class="chapter" data-level="4" data-path="index.html"><a href="#descripci%C3%B3n-y-justificaci%C3%B3n-del-conjunto-de-datos"><i class="fa fa-check"></i><b>4</b> Descripción y justificación del conjunto de datos</a></li>
+<li class="chapter" data-level="5" data-path="index.html"><a href="#preparaci%C3%B3n-y-filtrado-de-datos-serie-total-mensual"><i class="fa fa-check"></i><b>5</b> Preparación y filtrado de datos: serie total mensual</a></li>
+<li class="chapter" data-level="6" data-path="index.html"><a href="#construcci%C3%B3n-de-la-serie-temporal"><i class="fa fa-check"></i><b>6</b> Construcción de la serie temporal</a></li>
+<li class="chapter" data-level="7" data-path="index.html"><a href="#promedios-m%C3%B3viles-smaema-y-an%C3%A1lisis-de-tendencia"><i class="fa fa-check"></i><b>7</b> Promedios móviles (SMA/EMA) y análisis de tendencia</a></li>
+<li class="chapter" data-level="8" data-path="index.html"><a href="#estacionalidad-y-rezagos-seasonplot-subseries-acf-y-descomposici%C3%B3n"><i class="fa fa-check"></i><b>8</b> Estacionalidad y rezagos (seasonplot, subseries, ACF y descomposición)</a></li>
+<li class="chapter" data-level="9" data-path="index.html"><a href="#diferencias-%CE%B4-y-%CE%B4%E2%82%81%E2%82%82-rezagos-y-estabilizaci%C3%B3n"><i class="fa fa-check"></i><b>9</b> Diferencias Δ y Δ₁₂ (rezagos y estabilización)</a></li>
+<li class="chapter" data-level="10" data-path="conclusiones-unidad-3.html"><a href="conclusiones-unidad-3.html"><i class="fa fa-check"></i><b>10</b> Conclusiones Unidad 3</a></li>
+<li class="chapter" data-level="11" data-path="index.html"><a href="#metodolog%C3%ADa-holter-winter-y-suavizamiento-a-la-variable-tiempo."><i class="fa fa-check"></i><b>11</b> Metodología Holter-Winter y suavizamiento a la variable tiempo.</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html"><a href="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html"><i class="fa fa-check"></i><b>11.1</b> Ajuste de modelos Holt–Winters</a></li>
+<li class="chapter" data-level="11.2" data-path="index.html"><a href="#gr%C3%A1ficas-de-pron%C3%B3stico-y-bandas"><i class="fa fa-check"></i><b>11.2</b> Gráficas de pronóstico y bandas</a></li>
+<li class="chapter" data-level="11.3" data-path="index.html"><a href="#diagn%C3%B3sticos-de-residuales"><i class="fa fa-check"></i><b>11.3</b> Diagnósticos de residuales</a></li>
+<li class="chapter" data-level="11.4" data-path="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html"><a href="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html#conclusiones"><i class="fa fa-check"></i><b>11.4</b> Conclusiones</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="index.html"><a href="#preparaci%C3%B3n-y-divisi%C3%B3n-del-conjunto-de-datos"><i class="fa fa-check"></i><b>11.4.1</b> 1. Preparación y división del conjunto de datos</a></li>
+<li class="chapter" data-level="11.4.2" data-path="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html"><a href="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html#ajuste-de-los-modelos-holtwinters"><i class="fa fa-check"></i><b>11.4.2</b> 2. Ajuste de los modelos Holt–Winters</a></li>
+<li class="chapter" data-level="11.4.3" data-path="index.html"><a href="#pron%C3%B3stico-a-12-meses"><i class="fa fa-check"></i><b>11.4.3</b> 3.Pronóstico a 12 meses</a></li>
+<li class="chapter" data-level="11.4.4" data-path="index.html"><a href="#comparaci%C3%B3n-de-desempe%C3%B1o"><i class="fa fa-check"></i><b>11.4.4</b> 4. Comparación de desempeño</a></li>
+<li class="chapter" data-level="11.4.5" data-path="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html"><a href="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html#conclusiones-finales-del-modelo"><i class="fa fa-check"></i><b>11.4.5</b> Conclusiones finales del modelo</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/paolat87/1_Act_Series_de_tiempo_Bookdown" target="_blank">🌐 Publicado con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="preparación-y-filtrado-de-datos-serie-total-mensual" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> Preparación y filtrado de datos: serie total mensual<a href="#preparaci%C3%B3n-y-filtrado-de-datos-serie-total-mensual" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-1" tabindex="-1"></a>df0 <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(ruta_csv, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-2"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-2" tabindex="-1"></a><span class="fu">names</span>(df0) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">s+|</span><span class="sc">\\</span><span class="st">.|</span><span class="sc">\\</span><span class="st">(|</span><span class="sc">\\</span><span class="st">)|</span><span class="sc">\\</span><span class="st">[|</span><span class="sc">\\</span><span class="st">]&quot;</span>, <span class="st">&quot;_&quot;</span>, <span class="fu">tolower</span>(<span class="fu">names</span>(df0)))</span>
+<span id="cb9-3"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-4" tabindex="-1"></a><span class="co"># Detectar columnas clave</span></span>
+<span id="cb9-5"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-5" tabindex="-1"></a>cand_fecha <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">&quot;date|month|period|time|fecha&quot;</span>, <span class="fu">names</span>(df0), <span class="at">value =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-6"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-6" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="st">&quot;No encuentro columna de fecha&quot;</span> <span class="ot">=</span> <span class="fu">length</span>(cand_fecha) <span class="sc">&gt;=</span> <span class="dv">1</span>)</span>
+<span id="cb9-7"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-7" tabindex="-1"></a>col_fecha <span class="ot">&lt;-</span> cand_fecha[<span class="dv">1</span>]</span>
+<span id="cb9-8"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-8" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-9" tabindex="-1"></a>col_ind <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">any</span>(<span class="fu">grepl</span>(<span class="st">&quot;industry|sector|categoria|group&quot;</span>, <span class="fu">names</span>(df0)))) {</span>
+<span id="cb9-10"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-10" tabindex="-1"></a>  <span class="fu">grep</span>(<span class="st">&quot;industry|sector|categoria|group&quot;</span>, <span class="fu">names</span>(df0), <span class="at">value =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span>]</span>
+<span id="cb9-11"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-11" tabindex="-1"></a>} <span class="cf">else</span> <span class="cn">NA_character_</span></span>
+<span id="cb9-12"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-12" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-13" tabindex="-1"></a>cand_val <span class="ot">&lt;-</span> <span class="fu">grep</span>(<span class="st">&quot;turnover|value|ventas|importe|amount|index|volume&quot;</span>, <span class="fu">names</span>(df0), <span class="at">value =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-14"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-14" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(cand_val) <span class="sc">==</span> <span class="dv">0</span>) cand_val <span class="ot">&lt;-</span> <span class="fu">names</span>(df0)[<span class="fu">sapply</span>(df0, is.numeric)]</span>
+<span id="cb9-15"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-15" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="st">&quot;No encuentro columna numérica de valor&quot;</span> <span class="ot">=</span> <span class="fu">length</span>(cand_val) <span class="sc">&gt;=</span> <span class="dv">1</span>)</span>
+<span id="cb9-16"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-16" tabindex="-1"></a>col_valor <span class="ot">&lt;-</span> cand_val[<span class="dv">1</span>]</span>
+<span id="cb9-17"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-17" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-18" tabindex="-1"></a><span class="co"># Parseo de fecha robusto (YYYY-MM o variantes)</span></span>
+<span id="cb9-19"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-19" tabindex="-1"></a>df_parsed <span class="ot">&lt;-</span> df0 <span class="sc">%&gt;%</span></span>
+<span id="cb9-20"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-20" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">fecha_chr =</span> <span class="fu">as.character</span>(.data[[col_fecha]])) <span class="sc">%&gt;%</span></span>
+<span id="cb9-21"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-21" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-22"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-22" tabindex="-1"></a>    <span class="at">ym_try =</span> <span class="fu">suppressWarnings</span>(zoo<span class="sc">::</span><span class="fu">as.yearmon</span>(fecha_chr)),</span>
+<span id="cb9-23"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-23" tabindex="-1"></a>    <span class="at">fecha  =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb9-24"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-24" tabindex="-1"></a>      <span class="sc">!</span><span class="fu">is.na</span>(ym_try) <span class="sc">~</span> <span class="fu">as.Date</span>(ym_try),</span>
+<span id="cb9-25"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-25" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">suppressWarnings</span>(lubridate<span class="sc">::</span><span class="fu">parse_date_time</span>(</span>
+<span id="cb9-26"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-26" tabindex="-1"></a>        fecha_chr, <span class="at">orders =</span> <span class="fu">c</span>(<span class="st">&quot;Y-m-d&quot;</span>,<span class="st">&quot;d/m/Y&quot;</span>,<span class="st">&quot;m/d/Y&quot;</span>,<span class="st">&quot;Y-m&quot;</span>,<span class="st">&quot;Ymd&quot;</span>,<span class="st">&quot;dmY&quot;</span>,<span class="st">&quot;mdY&quot;</span>), <span class="at">tz =</span> <span class="st">&quot;UTC&quot;</span></span>
+<span id="cb9-27"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-27" tabindex="-1"></a>      )) <span class="sc">%&gt;%</span> <span class="fu">as.Date</span>()</span>
+<span id="cb9-28"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-28" tabindex="-1"></a>    )</span>
+<span id="cb9-29"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-29" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb9-30"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-30" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(fecha))</span>
+<span id="cb9-31"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-31" tabindex="-1"></a></span>
+<span id="cb9-32"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-32" tabindex="-1"></a><span class="co"># ===== Selección recomendada para la Unidad 2: TOTAL =====</span></span>
+<span id="cb9-33"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-33" tabindex="-1"></a>industry_choice <span class="ot">&lt;-</span> <span class="st">&quot;Total (industry)&quot;</span>  <span class="co"># preferido</span></span>
+<span id="cb9-34"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-34" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(col_ind)) {</span>
+<span id="cb9-35"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-35" tabindex="-1"></a>  inds <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(df_parsed[[col_ind]]))</span>
+<span id="cb9-36"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-36" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">&quot;Industrias disponibles:</span><span class="sc">\n</span><span class="st">- &quot;</span>, <span class="fu">paste</span>(inds, <span class="at">collapse =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">- &quot;</span>))</span>
+<span id="cb9-37"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-37" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span>industry_choice <span class="sc">%in%</span> inds) {</span>
+<span id="cb9-38"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-38" tabindex="-1"></a>    patt <span class="ot">&lt;-</span> <span class="st">&quot;(?i)total.*industry|all industries|overall&quot;</span></span>
+<span id="cb9-39"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-39" tabindex="-1"></a>    cand <span class="ot">&lt;-</span> <span class="fu">grep</span>(patt, inds, <span class="at">value =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-40"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-40" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">length</span>(cand) <span class="sc">&gt;</span> <span class="dv">0</span>) industry_choice <span class="ot">&lt;-</span> cand[<span class="dv">1</span>]</span>
+<span id="cb9-41"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-41" tabindex="-1"></a>  }</span>
+<span id="cb9-42"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-42" tabindex="-1"></a>  <span class="cf">if</span> (industry_choice <span class="sc">%in%</span> <span class="fu">unique</span>(df_parsed[[col_ind]])) {</span>
+<span id="cb9-43"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-43" tabindex="-1"></a>    df <span class="ot">&lt;-</span> df_parsed <span class="sc">%&gt;%</span></span>
+<span id="cb9-44"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-44" tabindex="-1"></a>      <span class="fu">filter</span>(.data[[col_ind]] <span class="sc">==</span> industry_choice) <span class="sc">%&gt;%</span></span>
+<span id="cb9-45"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-45" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">valor =</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.numeric</span>(.data[[col_valor]]))) <span class="sc">%&gt;%</span></span>
+<span id="cb9-46"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-46" tabindex="-1"></a>      <span class="fu">select</span>(fecha, valor) <span class="sc">%&gt;%</span></span>
+<span id="cb9-47"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-47" tabindex="-1"></a>      <span class="fu">arrange</span>(fecha)</span>
+<span id="cb9-48"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-48" tabindex="-1"></a>    <span class="fu">message</span>(<span class="st">&quot;Usando industria/segmento: &quot;</span>, industry_choice)</span>
+<span id="cb9-49"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-49" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb9-50"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-50" tabindex="-1"></a>    <span class="co"># Fallback: sumar todas las industrias por mes</span></span>
+<span id="cb9-51"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-51" tabindex="-1"></a>    df <span class="ot">&lt;-</span> df_parsed <span class="sc">%&gt;%</span></span>
+<span id="cb9-52"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-52" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">valor =</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.numeric</span>(.data[[col_valor]]))) <span class="sc">%&gt;%</span></span>
+<span id="cb9-53"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-53" tabindex="-1"></a>      <span class="fu">group_by</span>(fecha) <span class="sc">%&gt;%</span></span>
+<span id="cb9-54"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-54" tabindex="-1"></a>      <span class="fu">summarise</span>(<span class="at">valor =</span> <span class="fu">sum</span>(valor, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-55"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-55" tabindex="-1"></a>      <span class="fu">arrange</span>(fecha)</span>
+<span id="cb9-56"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-56" tabindex="-1"></a>    <span class="fu">message</span>(<span class="st">&quot;No encontré &#39;Total (industry)&#39;. Usando TOTAL mensual (suma de todas las industrias).&quot;</span>)</span>
+<span id="cb9-57"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-57" tabindex="-1"></a>  }</span>
+<span id="cb9-58"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-58" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb9-59"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-59" tabindex="-1"></a>  <span class="co"># Si no existe columna de industria, seguimos con la única serie</span></span>
+<span id="cb9-60"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-60" tabindex="-1"></a>  df <span class="ot">&lt;-</span> df_parsed <span class="sc">%&gt;%</span></span>
+<span id="cb9-61"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-61" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">valor =</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.numeric</span>(.data[[col_valor]]))) <span class="sc">%&gt;%</span></span>
+<span id="cb9-62"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-62" tabindex="-1"></a>    <span class="fu">select</span>(fecha, valor) <span class="sc">%&gt;%</span></span>
+<span id="cb9-63"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-63" tabindex="-1"></a>    <span class="fu">arrange</span>(fecha)</span>
+<span id="cb9-64"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-64" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">&quot;No hay columna de industria. Usando la serie disponible.&quot;</span>)</span>
+<span id="cb9-65"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-65" tabindex="-1"></a>}</span>
+<span id="cb9-66"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-66" tabindex="-1"></a></span>
+<span id="cb9-67"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-67" tabindex="-1"></a></span>
+<span id="cb9-68"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-68" tabindex="-1"></a></span>
+<span id="cb9-69"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb9-69" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">📊 **Serie agregada: Total mensual de ventas minoristas (Australia)**</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## 📊 **Serie agregada: Total mensual de ventas minoristas (Australia)**</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb11-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Cada observación representa el valor total mensual del comercio minorista sumando todas las industrias.</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## Cada observación representa el valor total mensual del comercio minorista sumando todas las industrias.</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb13-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb13-2" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb13-3" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb13-4"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb13-4" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Tabla 2. Serie total mensual de ventas minoristas en Australia (primeras 10 observaciones).&quot;</span>,</span>
+<span id="cb13-5"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb13-5" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb13-6"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb13-6" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Fecha&quot;</span>, <span class="st">&quot;Valor (millones de AUD)&quot;</span>)</span>
+<span id="cb13-7"><a href="preparación-y-filtrado-de-datos-serie-total-mensual.html#cb13-7" tabindex="-1"></a>  )</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-3">Table 5.1: </span>Tabla 2. Serie total mensual de ventas minoristas en Australia (primeras 10 observaciones).</caption>
+<thead>
+<tr class="header">
+<th align="center">Fecha</th>
+<th align="center">Valor (millones de AUD)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1982-04-01</td>
+<td align="center">6225.3</td>
+</tr>
+<tr class="even">
+<td align="center">1982-05-01</td>
+<td align="center">6382.4</td>
+</tr>
+<tr class="odd">
+<td align="center">1982-06-01</td>
+<td align="center">6161.8</td>
+</tr>
+<tr class="even">
+<td align="center">1982-07-01</td>
+<td align="center">6398.8</td>
+</tr>
+<tr class="odd">
+<td align="center">1982-08-01</td>
+<td align="center">6163.4</td>
+</tr>
+<tr class="even">
+<td align="center">1982-09-01</td>
+<td align="center">6330.9</td>
+</tr>
+<tr class="odd">
+<td align="center">1982-10-01</td>
+<td align="center">6535.2</td>
+</tr>
+<tr class="even">
+<td align="center">1982-11-01</td>
+<td align="center">7021.7</td>
+</tr>
+<tr class="odd">
+<td align="center">1982-12-01</td>
+<td align="center">9321.8</td>
+</tr>
+<tr class="even">
+<td align="center">1983-01-01</td>
+<td align="center">6286.3</td>
+</tr>
+</tbody>
+</table>
+<p>Una vez identificado el conjunto de datos original, el siguiente paso consistió en preparar la información y filtrar la serie temporal de interés.
+El dataset inicial incluye registros mensuales desagregados por estado e industria, lo que genera múltiples combinaciones posibles.
+Para los fines de esta Unidad —centrados en el análisis de la estructura de los datos y la identificación de patrones temporales— se seleccionó una serie agregada, correspondiente al total mensual de ventas minoristas a nivel nacional.</p>
+<p>El código ejecutado agrupa los registros por la variable fecha y suma el valor del “Turnover” (ventas) de todas las industrias disponibles.
+De este modo, se obtiene una serie más estable y representativa del comportamiento general del comercio minorista australiano.</p>
+<p>La Tabla 2 presenta las primeras observaciones de la serie consolidada. En ella se observan las columnas:</p>
+<p>Variable Descripción
+Fecha Corresponde al primer día del mes registrado (en formato YYYY-MM-DD).
+Valor (millones de AUD) Monto total de ventas minoristas acumuladas para todas las industrias en el mes correspondiente.</p>
+<p>Esta transformación permite trabajar con una sola serie continua en el tiempo, eliminando la variabilidad interna de los diferentes sectores y conservando la estructura mensual necesaria para los análisis posteriores de tendencia, promedio móvil, rezagos y estacionalidad.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="descripción-y-justificación-del-conjunto-de-datos.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="construcción-de-la-serie-temporal.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>

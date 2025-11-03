@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Descripción y justificación del conjunto de datos | Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)</title>
+  <meta name="description" content="4 Descripción y justificación del conjunto de datos | Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Descripción y justificación del conjunto de datos | Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Descripción y justificación del conjunto de datos | Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)" />
+  
+  
+  
+
+<meta name="author" content="Edgar Esteban Grajales, Kassandra Mendoza-Sarmiento y Paula Tovar Ríos" />
+
+
+<meta name="date" content="2025-11-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="conclusiones-unidad-1.html"/>
+<link rel="next" href="preparación-y-filtrado-de-datos-serie-total-mensual.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">📊 Series de Tiempo - Kaggle Retail Turnover</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="#introducci%C3%B3n"><i class="fa fa-check"></i><b>1</b> Introducción</a></li>
+<li class="chapter" data-level="2" data-path="index.html"><a href="#propuesta-de-informaci%C3%B3n-a-pronosticar"><i class="fa fa-check"></i><b>2</b> Propuesta de información a pronosticar</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="propuesta-de-información-a-pronosticar.html"><a href="propuesta-de-información-a-pronosticar.html"><i class="fa fa-check"></i><b>2.1</b> <strong>Tema y base de datos</strong></a></li>
+<li class="chapter" data-level="2.2" data-path="propuesta-de-información-a-pronosticar.html"><a href="propuesta-de-información-a-pronosticar.html#importancia-y-valor-agregado"><i class="fa fa-check"></i><b>2.2</b> <strong>Importancia y valor agregado</strong></a></li>
+<li class="chapter" data-level="2.3" data-path="propuesta-de-información-a-pronosticar.html"><a href="propuesta-de-información-a-pronosticar.html#alcance-propuesto"><i class="fa fa-check"></i><b>2.3</b> <strong>Alcance propuesto</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="conclusiones-unidad-1.html"><a href="conclusiones-unidad-1.html"><i class="fa fa-check"></i><b>3</b> Conclusiones Unidad 1</a></li>
+<li class="chapter" data-level="4" data-path="index.html"><a href="#descripci%C3%B3n-y-justificaci%C3%B3n-del-conjunto-de-datos"><i class="fa fa-check"></i><b>4</b> Descripción y justificación del conjunto de datos</a></li>
+<li class="chapter" data-level="5" data-path="index.html"><a href="#preparaci%C3%B3n-y-filtrado-de-datos-serie-total-mensual"><i class="fa fa-check"></i><b>5</b> Preparación y filtrado de datos: serie total mensual</a></li>
+<li class="chapter" data-level="6" data-path="index.html"><a href="#construcci%C3%B3n-de-la-serie-temporal"><i class="fa fa-check"></i><b>6</b> Construcción de la serie temporal</a></li>
+<li class="chapter" data-level="7" data-path="index.html"><a href="#promedios-m%C3%B3viles-smaema-y-an%C3%A1lisis-de-tendencia"><i class="fa fa-check"></i><b>7</b> Promedios móviles (SMA/EMA) y análisis de tendencia</a></li>
+<li class="chapter" data-level="8" data-path="index.html"><a href="#estacionalidad-y-rezagos-seasonplot-subseries-acf-y-descomposici%C3%B3n"><i class="fa fa-check"></i><b>8</b> Estacionalidad y rezagos (seasonplot, subseries, ACF y descomposición)</a></li>
+<li class="chapter" data-level="9" data-path="index.html"><a href="#diferencias-%CE%B4-y-%CE%B4%E2%82%81%E2%82%82-rezagos-y-estabilizaci%C3%B3n"><i class="fa fa-check"></i><b>9</b> Diferencias Δ y Δ₁₂ (rezagos y estabilización)</a></li>
+<li class="chapter" data-level="10" data-path="conclusiones-unidad-3.html"><a href="conclusiones-unidad-3.html"><i class="fa fa-check"></i><b>10</b> Conclusiones Unidad 3</a></li>
+<li class="chapter" data-level="11" data-path="index.html"><a href="#metodolog%C3%ADa-holter-winter-y-suavizamiento-a-la-variable-tiempo."><i class="fa fa-check"></i><b>11</b> Metodología Holter-Winter y suavizamiento a la variable tiempo.</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html"><a href="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html"><i class="fa fa-check"></i><b>11.1</b> Ajuste de modelos Holt–Winters</a></li>
+<li class="chapter" data-level="11.2" data-path="index.html"><a href="#gr%C3%A1ficas-de-pron%C3%B3stico-y-bandas"><i class="fa fa-check"></i><b>11.2</b> Gráficas de pronóstico y bandas</a></li>
+<li class="chapter" data-level="11.3" data-path="index.html"><a href="#diagn%C3%B3sticos-de-residuales"><i class="fa fa-check"></i><b>11.3</b> Diagnósticos de residuales</a></li>
+<li class="chapter" data-level="11.4" data-path="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html"><a href="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html#conclusiones"><i class="fa fa-check"></i><b>11.4</b> Conclusiones</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="index.html"><a href="#preparaci%C3%B3n-y-divisi%C3%B3n-del-conjunto-de-datos"><i class="fa fa-check"></i><b>11.4.1</b> 1. Preparación y división del conjunto de datos</a></li>
+<li class="chapter" data-level="11.4.2" data-path="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html"><a href="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html#ajuste-de-los-modelos-holtwinters"><i class="fa fa-check"></i><b>11.4.2</b> 2. Ajuste de los modelos Holt–Winters</a></li>
+<li class="chapter" data-level="11.4.3" data-path="index.html"><a href="#pron%C3%B3stico-a-12-meses"><i class="fa fa-check"></i><b>11.4.3</b> 3.Pronóstico a 12 meses</a></li>
+<li class="chapter" data-level="11.4.4" data-path="index.html"><a href="#comparaci%C3%B3n-de-desempe%C3%B1o"><i class="fa fa-check"></i><b>11.4.4</b> 4. Comparación de desempeño</a></li>
+<li class="chapter" data-level="11.4.5" data-path="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html"><a href="metodología-holter-winter-y-suavizamiento-a-la-variable-tiempo..html#conclusiones-finales-del-modelo"><i class="fa fa-check"></i><b>11.4.5</b> Conclusiones finales del modelo</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/paolat87/1_Act_Series_de_tiempo_Bookdown" target="_blank">🌐 Publicado con bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Propuesta — Series de Tiempo (Kaggle: Australia Monthly Retail Turnover)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="descripción-y-justificación-del-conjunto-de-datos" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> Descripción y justificación del conjunto de datos<a href="#descripci%C3%B3n-y-justificaci%C3%B3n-del-conjunto-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>El conjunto de datos utilizado corresponde al registro histórico del Retail Trade, Australia, disponible públicamente en Kaggle bajo el nombre “Australia Monthly Retail Turnover Data”.
+Este dataset recopila información mensual sobre el volumen de ventas minoristas en diferentes estados y sectores de la economía australiana desde 1982 hasta la actualidad.</p>
+<p>Para este análisis se descargó el archivo directamente desde Kaggle utilizando la librería reticulate y el módulo de Python kagglehub, lo cual garantiza la trazabilidad y reproducibilidad del proceso.
+El bloque de código permitió acceder automáticamente a los archivos, identificar el formato de columnas y realizar una vista previa estructurada de las primeras observaciones del conjunto de datos (ver Tabla 1).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-2"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb1-4"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-4" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-5"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-5" tabindex="-1"></a><span class="fu">library</span>(TTR)</span>
+<span id="cb1-6"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-6" tabindex="-1"></a><span class="fu">library</span>(zoo) </span>
+<span id="cb1-7"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-7" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb1-8"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-8" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-9"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-9" tabindex="-1"></a><span class="fu">library</span>(tsibble)</span>
+<span id="cb1-10"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-10" tabindex="-1"></a><span class="fu">library</span>(fabletools)</span>
+<span id="cb1-11"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-11" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb1-12"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-12" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb1-13"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-13" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb1-14"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-14" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-15" tabindex="-1"></a><span class="co"># Helpers: SMA y EMA sin TTR</span></span>
+<span id="cb1-16"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-16" tabindex="-1"></a>SMA_r <span class="ot">&lt;-</span> <span class="cf">function</span>(x, n){</span>
+<span id="cb1-17"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-17" tabindex="-1"></a>  <span class="cf">if</span>(n <span class="sc">&lt;</span> <span class="dv">2</span>) <span class="fu">return</span>(x)</span>
+<span id="cb1-18"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-18" tabindex="-1"></a>  pad <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA_real_</span>, n <span class="sc">-</span> <span class="dv">1</span><span class="dt">L</span>)</span>
+<span id="cb1-19"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-19" tabindex="-1"></a>  <span class="fu">c</span>(pad, zoo<span class="sc">::</span><span class="fu">rollmean</span>(x, <span class="at">k =</span> n, <span class="at">align =</span> <span class="st">&quot;right&quot;</span>, <span class="at">na.pad =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb1-20"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-20" tabindex="-1"></a>}</span>
+<span id="cb1-21"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-21" tabindex="-1"></a>EMA_r <span class="ot">&lt;-</span> <span class="cf">function</span>(x, n){</span>
+<span id="cb1-22"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-22" tabindex="-1"></a>  <span class="cf">if</span>(n <span class="sc">&lt;</span> <span class="dv">2</span>) <span class="fu">return</span>(x)</span>
+<span id="cb1-23"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-23" tabindex="-1"></a>  alpha <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">/</span>(n <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb1-24"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-24" tabindex="-1"></a>  x0 <span class="ot">&lt;-</span> x</span>
+<span id="cb1-25"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-25" tabindex="-1"></a>  first <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="sc">!</span><span class="fu">is.na</span>(x0))[<span class="dv">1</span>]</span>
+<span id="cb1-26"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-26" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">length</span>(first)<span class="sc">==</span><span class="dv">0</span>) <span class="fu">return</span>(<span class="fu">rep</span>(<span class="cn">NA_real_</span>, <span class="fu">length</span>(x)))</span>
+<span id="cb1-27"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-27" tabindex="-1"></a>  x0[<span class="dv">1</span><span class="sc">:</span>first] <span class="ot">&lt;-</span> x0[first]</span>
+<span id="cb1-28"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-28" tabindex="-1"></a>  <span class="fu">as.numeric</span>(stats<span class="sc">::</span><span class="fu">filter</span>(x0, alpha, <span class="at">method =</span> <span class="st">&quot;recursive&quot;</span>))</span>
+<span id="cb1-29"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb1-29" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-1" tabindex="-1"></a><span class="co"># === Descarga y vista previa organizada ===</span></span>
+<span id="cb2-2"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-3" tabindex="-1"></a><span class="co"># Asegurar dependencias</span></span>
+<span id="cb2-4"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-4" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">&quot;reticulate&quot;</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) <span class="fu">install.packages</span>(<span class="st">&quot;reticulate&quot;</span>)</span>
+<span id="cb2-5"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-5" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb2-6"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-6" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">py_module_available</span>(<span class="st">&quot;kagglehub&quot;</span>)) reticulate<span class="sc">::</span><span class="fu">py_install</span>(<span class="st">&quot;kagglehub&quot;</span>, <span class="at">pip =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-7"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-8" tabindex="-1"></a><span class="co"># 1) Descargar dataset desde Kaggle</span></span>
+<span id="cb2-9"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-9" tabindex="-1"></a>kh <span class="ot">&lt;-</span> reticulate<span class="sc">::</span><span class="fu">import</span>(<span class="st">&quot;kagglehub&quot;</span>)</span>
+<span id="cb2-10"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-10" tabindex="-1"></a>dest_root <span class="ot">&lt;-</span> kh<span class="sc">$</span><span class="fu">dataset_download</span>(<span class="st">&quot;kanyaweechomming101/australia-monthly-retail-turnover-data&quot;</span>)</span>
+<span id="cb2-11"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-11" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-12" tabindex="-1"></a><span class="co"># 2) Ubicar CSV</span></span>
+<span id="cb2-13"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-13" tabindex="-1"></a>csvs <span class="ot">&lt;-</span> <span class="fu">list.files</span>(dest_root, <span class="at">pattern =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.csv$&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-14"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-14" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="st">&quot;No se encontraron archivos .csv&quot;</span> <span class="ot">=</span> <span class="fu">length</span>(csvs) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb2-15"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-15" tabindex="-1"></a>ruta_csv <span class="ot">&lt;-</span> csvs[<span class="dv">1</span>]  <span class="co"># si hay varios, puedes cambiar el índice</span></span>
+<span id="cb2-16"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-16" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-17" tabindex="-1"></a><span class="co"># 3) Leer primeras filas</span></span>
+<span id="cb2-18"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-18" tabindex="-1"></a><span class="fu">library</span>(readr); <span class="fu">library</span>(dplyr); <span class="fu">library</span>(knitr)</span>
+<span id="cb2-19"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-19" tabindex="-1"></a>peek <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(ruta_csv, <span class="at">n_max =</span> <span class="dv">10</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-20"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-20" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-21" tabindex="-1"></a><span class="co"># 4) Mostrar encabezado y tabla organizada</span></span>
+<span id="cb2-22"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb2-22" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">📦 **Vista previa del dataset: Retail Turnover Australia**</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## 
+## 📦 **Vista previa del dataset: Retail Turnover Australia**</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb4-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Archivo cargado desde Kaggle:&quot;</span>, <span class="fu">basename</span>(ruta_csv), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## Archivo cargado desde Kaggle: retail.csv</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb6-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Ubicación local:&quot;</span>, dest_root, <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>## Ubicación local: C:\Users\kmend\.cache\kagglehub\datasets\kanyaweechomming101\australia-monthly-retail-turnover-data\versions\1</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb8-1" tabindex="-1"></a>peek <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb8-2" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb8-3" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb8-4"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb8-4" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Tabla 1. Vista previa de las primeras 10 filas del dataset de ventas minoristas en Australia (Kaggle)&quot;</span>,</span>
+<span id="cb8-5"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb8-5" tabindex="-1"></a>    <span class="at">align =</span> <span class="st">&quot;c&quot;</span>,</span>
+<span id="cb8-6"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb8-6" tabindex="-1"></a>    <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Estado&quot;</span>, <span class="st">&quot;Industria&quot;</span>, <span class="st">&quot;ID Serie&quot;</span>, <span class="st">&quot;Mes&quot;</span>, <span class="st">&quot;Turnover&quot;</span>)</span>
+<span id="cb8-7"><a href="descripción-y-justificación-del-conjunto-de-datos.html#cb8-7" tabindex="-1"></a>  )</span></code></pre></div>
+<table style="width:100%;">
+<caption><span id="tab:unnamed-chunk-2">Table 4.1: </span>Tabla 1. Vista previa de las primeras 10 filas del dataset de ventas minoristas en Australia (Kaggle)</caption>
+<colgroup>
+<col width="29%" />
+<col width="40%" />
+<col width="10%" />
+<col width="9%" />
+<col width="9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Estado</th>
+<th align="center">Industria</th>
+<th align="center">ID Serie</th>
+<th align="center">Mes</th>
+<th align="center">Turnover</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Australian Capital Territory</td>
+<td align="center">Cafes, restaurants and catering services</td>
+<td align="center">A3349849A</td>
+<td align="center">1982 Apr</td>
+<td align="center">4.4</td>
+</tr>
+<tr class="even">
+<td align="center">Australian Capital Territory</td>
+<td align="center">Cafes, restaurants and catering services</td>
+<td align="center">A3349849A</td>
+<td align="center">1982 May</td>
+<td align="center">3.4</td>
+</tr>
+<tr class="odd">
+<td align="center">Australian Capital Territory</td>
+<td align="center">Cafes, restaurants and catering services</td>
+<td align="center">A3349849A</td>
+<td align="center">1982 Jun</td>
+<td align="center">3.6</td>
+</tr>
+<tr class="even">
+<td align="center">Australian Capital Territory</td>
+<td align="center">Cafes, restaurants and catering services</td>
+<td align="center">A3349849A</td>
+<td align="center">1982 Jul</td>
+<td align="center">4.0</td>
+</tr>
+<tr class="odd">
+<td align="center">Australian Capital Territory</td>
+<td align="center">Cafes, restaurants and catering services</td>
+<td align="center">A3349849A</td>
+<td align="center">1982 Aug</td>
+<td align="center">3.6</td>
+</tr>
+<tr class="even">
+<td align="center">Australian Capital Territory</td>
+<td align="center">Cafes, restaurants and catering services</td>
+<td align="center">A3349849A</td>
+<td align="center">1982 Sep</td>
+<td align="center">4.2</td>
+</tr>
+<tr class="odd">
+<td align="center">Australian Capital Territory</td>
+<td align="center">Cafes, restaurants and catering services</td>
+<td align="center">A3349849A</td>
+<td align="center">1982 Oct</td>
+<td align="center">4.8</td>
+</tr>
+<tr class="even">
+<td align="center">Australian Capital Territory</td>
+<td align="center">Cafes, restaurants and catering services</td>
+<td align="center">A3349849A</td>
+<td align="center">1982 Nov</td>
+<td align="center">5.4</td>
+</tr>
+<tr class="odd">
+<td align="center">Australian Capital Territory</td>
+<td align="center">Cafes, restaurants and catering services</td>
+<td align="center">A3349849A</td>
+<td align="center">1982 Dec</td>
+<td align="center">6.9</td>
+</tr>
+<tr class="even">
+<td align="center">Australian Capital Territory</td>
+<td align="center">Cafes, restaurants and catering services</td>
+<td align="center">A3349849A</td>
+<td align="center">1983 Jan</td>
+<td align="center">3.8</td>
+</tr>
+</tbody>
+</table>
+<p>La tabla muestra las siguientes variables principales:</p>
+<p>Variable Descripción</p>
+<p>State Estado o territorio australiano del cual proviene el registro.
+Industry Sector económico o grupo de actividades comerciales.
+Series ID Identificador de la serie publicada por la oficina estadística australiana.
+Month Fecha del registro mensual (año y mes).
+Turnover Valor total de ventas minoristas expresado en millones de dólares australianos.</p>
+<p>Aunque el dataset contiene múltiples combinaciones de estado e industria, en esta actividad se analizará una serie única y representativa, correspondiente al “Total (industry)”, que refleja el comportamiento global del comercio minorista australiano.
+Esta decisión se tomó porque el objetivo de la Unidad 2 es identificar tendencias, rezagos y estacionalidades en una serie de tiempo de manera clara, sin el ruido ni las fluctuaciones que presentan sectores individuales.</p>
+<p>La selección del Total (industry) permite:</p>
+<p>Observar la tendencia agregada de las ventas en el país.</p>
+<p>Detectar con mayor precisión la estacionalidad mensual (patrones de aumento y disminución).</p>
+<p>Facilitar el uso de herramientas estadísticas de suavizamiento y descomposición en los bloques siguientes.</p>
+<p>A partir de la revisión de esta tabla y el entendimiento de su estructura, se confirma que el conjunto de datos es adecuado para el estudio de series temporales económicas, ya que presenta una variable cuantitativa (ventas) observada en intervalos regulares de tiempo (mensuales).
+La amplitud temporal del dataset (más de 40 años) permitirá analizar la evolución del comercio minorista, identificando cambios estructurales, ciclos económicos y comportamientos estacionales que servirán como base para las siguientes etapas del análisis.</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="conclusiones-unidad-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="preparación-y-filtrado-de-datos-serie-total-mensual.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>
