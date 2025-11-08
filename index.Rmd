@@ -941,3 +941,138 @@ El modelo aditivo presenta los menores valores en todas las métricas, por lo cu
 - Los residuales muestran un comportamiento estable, aunque con cierta autocorrelación, lo que sugiere complementar el análisis con modelos SARIMA en etapas posteriores.
 
 - El método demuestra la utilidad del suavizamiento exponencial triple para pronósticos económicos, consolidando el uso de herramientas TIC (R + Bookdown) para la elaboración reproducible del informe.
+
+
+
+# Modelos estacionarios en series de tiempo
+
+
+```{r u2-arima, message=FALSE, warning=FALSE}
+# Paquetes
+library(ggplot2)
+library(forecast)
+library(tseries)
+library(zoo)
+theme_set(theme_minimal(base_size = 12))
+
+# 1) Tendencia lineal (uso explícito de la variable tiempo) 
+modelo_lineal <- lm(ts_y ~ time(ts_y))
+summary(modelo_lineal)
+
+autoplot(ts_y) +
+  geom_abline(
+    intercept = coef(modelo_lineal)[1],
+    slope     = coef(modelo_lineal)[2],
+    color     = "red"
+  ) +
+  labs(title = "Ajuste de tendencia lineal en la serie",
+       x = "Time", y = "Nivel")
+
+# 2) Estacionariedad: ADF y diferenciaciones (d y D) 
+# ADF sobre la serie original (H0: raíz unitaria -> no estacionaria)
+adf_orig <- adf.test(ts_y)
+adf_orig$p.value
+
+# Diferenciación no estacional (d=1) y estacional (D=1, s=12)
+ts_d1   <- diff(ts_y, differences = 1)
+ts_D1   <- diff(ts_y, lag = 12)
+ts_d1D1 <- diff(ts_d1, lag = 12)
+
+# ADF tras d=1
+adf_d1 <- adf.test(na.omit(ts_d1))
+adf_d1$p.value
+
+# ADF tras d=1 y D=1
+adf_d1D1 <- adf.test(na.omit(ts_d1D1))
+adf_d1D1$p.value
+
+# Visual: serie diferenciada final
+autoplot(ts_d1D1) +
+  labs(title = "Serie diferenciada (d=1, D=1, s=12)",
+       x = "Time", y = "ΔΔ serie")
+
+# 3) Identificación rápida: ACF/PACF de la serie estacionaria 
+gridExtra::grid.arrange(
+  ggAcf(na.omit(ts_d1D1)) + labs(title = "ACF de la serie estacionaria"),
+  ggPacf(na.omit(ts_d1D1)) + labs(title = "PACF de la serie estacionaria"),
+  nrow = 1
+)
+
+# 4) Estimación ARIMA (permitimos búsqueda exhaustiva)
+# Si ya sabes que debe haber d=1 y D=1 con s=12, lo fijas:
+fit <- auto.arima(
+  ts_y,
+  d = 1, D = 1, seasonal = TRUE,
+  stepwise = FALSE, approximation = FALSE, biasadj = TRUE
+)
+fit
+summary(fit)
+
+# 5) Diagnóstico de residuales
+checkresiduals(fit)   # incluye Ljung-Box; busca p-value alto
+
+# Prueba Ljung-Box explícita en 24 rezagos (aprox. 2 años)
+Box.test(residuals(fit), lag = 24, type = "Ljung-Box", fitdf = length(coef(fit)))
+
+# 6) Pronóstico a 12 periodos
+fc <- forecast(fit, h = 12)
+autoplot(fc) +
+  labs(title = "Pronóstico ARIMA a 12 periodos",
+       x = "Time", y = "Nivel")
+
+# Tabla breve de pronóstico (punto e intervalos)
+data.frame(
+  Fecha      = as.yearmon(time(fc$mean)),
+  Punto      = as.numeric(fc$mean),
+  LI_80      = as.numeric(fc$lower[,"80%"]),
+  LS_80      = as.numeric(fc$upper[,"80%"]),
+  LI_95      = as.numeric(fc$lower[,"95%"]),
+  LS_95      = as.numeric(fc$upper[,"95%"])
+)
+```
+
+Métricas (RMSE/MAE/ MAPE) con un holdout de 12 meses:
+
+```{r u2-holdout, message=FALSE, warning=FALSE}
+h <- 12
+n <- length(ts_y)
+ts_train <- window(ts_y, end = time(ts_y)[n - h])
+ts_test  <- window(ts_y, start = time(ts_y)[n - h + 1])
+
+fit_tr <- auto.arima(ts_train, d=1, D=1, seasonal=TRUE,
+                     stepwise=FALSE, approximation=FALSE, biasadj=TRUE)
+fc_tr  <- forecast(fit_tr, h = h)
+
+# Métricas sobre el holdout
+accuracy(fc_tr, ts_test)
+```
+
+
+## 1. Evaluación de estacionariedad
+
+Al analizar la serie original se identificó una clara tendencia creciente y presencia de estacionalidad mensual. Para eliminar dichos componentes y lograr una serie estacionaria, se aplicó una diferenciación de primer orden.
+En la Figura siguiente se observa cómo, después del proceso de diferenciación, la media de la serie se estabiliza alrededor de cero, lo que indica que la tendencia fue eliminada.
+
+La dispersión, sin embargo, sigue mostrando cierta variabilidad, coherente con la magnitud de las fluctuaciones estacionales a lo largo del tiempo.
+
+## 2. Identificación y estimación del modelo ARIMA
+
+A través de la función auto.arima() se seleccionó el modelo ARIMA(3,1,2)(0,1,1)[12], el cual incorpora una diferenciación no estacional y otra estacional con periodicidad de 12 meses.
+Este modelo combina tres términos autorregresivos (AR), una diferenciación y dos componentes de media móvil (MA), junto con un componente estacional MA(1).
+
+## 3. Diagnóstico de residuales
+
+En la Figura de diagnóstico se observa que los residuales se distribuyen de manera aleatoria alrededor de cero, sin patrones de autocorrelación significativos en la función ACF, lo cual valida la adecuación del modelo ajustado.
+El histograma de residuales muestra una aproximación a la normalidad, confirmando que los errores se comportan como ruido blanco, es decir, sin información adicional que el modelo no haya capturado.
+
+## 4. Pronóstico del modelo
+
+Finalmente, se generó un pronóstico a 12 periodos (equivalentes a un año).
+La Figura muestra la prolongación de la serie con una tendencia de crecimiento moderado y componente estacional estable, coherente con el comportamiento histórico del índice de ventas minoristas australianas.
+Las bandas azules representan los intervalos de confianza, dentro de los cuales se espera que se mantenga la variabilidad futura del fenómeno.
+
+## 5. Conclusión modelos estacionarios
+
+El modelo ARIMA(3,1,2)(0,1,1)[12] demostró un buen ajuste y capacidad predictiva para la serie analizada.
+Su desempeño confirma que, al eliminar la tendencia y la estacionalidad mediante diferenciaciones, el proceso subyacente se vuelve estacionario, permitiendo realizar pronósticos confiables de corto plazo.
+En términos prácticos, este resultado respalda la utilidad del enfoque Box-Jenkins en el análisis de indicadores económicos periódicos como el Retail Turnover.

@@ -29,3 +29,9 @@ ajuste-de-los-modelos-holtwinters
 pronóstico-a-12-meses
 comparación-de-desempeño
 conclusiones-finales-del-modelo
+modelos-estacionarios-en-series-de-tiempo
+evaluación-de-estacionariedad
+identificación-y-estimación-del-modelo-arima
+diagnóstico-de-residuales
+pronóstico-del-modelo
+conclusión-modelos-estacionarios
